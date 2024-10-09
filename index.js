@@ -1,36 +1,59 @@
 var buttonColours = ["green", "red", "yellow", "blue"];
 var gamePattern = [];
-var colorNumber = nextSequence();
-var chosenColorNumber;
+var chosenColourNumber;
+var randomColourNumber = nextSequence();
+gamePattern.push(randomColourNumber);
+var gameLevel = gamePattern.length;
+var index = 0;
+console.log(gamePattern);
 
-function nextSequence(){
+$(document).keydown(function (event) {
+      if (event.key === "a") {
+            $("#level-title").text("Level " + gameLevel);
+      }
+})
+
+$(".btn").click(function () {
+      switch (this.id) {
+            case "green":
+                  chosenColourNumber = 0;
+                  break;
+            case "red":
+                  chosenColourNumber = 1;
+                  break;
+            case "yellow":
+                  chosenColourNumber = 2;
+                  break;
+            case "blue":
+                  chosenColourNumber = 3;
+                  break;
+      }
+
+      if (chosenColourNumber != gamePattern[index]) {
+            $("body").addClass("game-over");
+            setTimeout(function () {
+                  $("body").removeClass("game-over");
+            }, 1000)
+            gamePattern = [];
+            colorNumber = nextSequence();
+            gamePattern.push(colorNumber);
+            gameLevel = 1;
+            index = 0;
+
+      } else if (chosenColourNumber === gamePattern[index] && index === gameLevel) {
+            colorNumber = nextSequence();
+            gamePattern.push(colorNumber);
+            gameLevel++;
+            index = 0;
+            $("#level-title").text("Level " + gameLevel);
+      } else if (chosenColourNumber === gamePattern[index] ) {
+            index++;
+      }
+})
+
+
+function nextSequence() {
       var randomNumber = Math.random();
       var colorNumber = Math.floor(randomNumber * 4);
       return colorNumber;
 }
-
-
-$(".btn").click(function(){
-      //console.log(this);
-      //colorNumber = nextSequence();
-      //gamePattern.push(colorNumber);
-      var chosenColorNumber;
-      switch(this.id){
-            case "green":
-                  chosenColorNumber = 0;
-                  break;
-                  case "red":
-                  chosenColorNumber = 1;
-                  break;
-                  case "yellow":
-                  chosenColorNumber = 2;
-                  break;
-                  case "blue":
-                  chosenColorNumber = 3;
-                  break;
-      }
-
-      console.log(chosenColorNumber);
-
-})
-
