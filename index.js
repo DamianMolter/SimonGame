@@ -13,6 +13,7 @@ $(document).keydown(function (event) {
 });
 
 $(".btn").click(function () {
+
   switch (this.id) {
     case "green":
       chosenColourNumber = 0;
@@ -28,7 +29,8 @@ $(".btn").click(function () {
       break;
   }
 
-  showClickedButton(chosenColourNumber);
+  animatePress(chosenColourNumber);
+
 
   if (chosenColourNumber != gamePattern[index]) {
     displayGameOver(buttonColours);
@@ -47,12 +49,10 @@ $(".btn").click(function () {
     $("#level-title").text("Level " + gameLevel);
     buttonSounds[chosenColourNumber].play();
     console.log(gamePattern); //test
-    showClickedButton(chosenColourNumber);
     setTimeout(showNextColorInSequence, 1000);
   } else if (chosenColourNumber === gamePattern[index]) {
     index++;
     buttonSounds[chosenColourNumber].play();
-    showClickedButton(chosenColourNumber);
   }
 });
 
@@ -108,12 +108,9 @@ function showNextColorInSequence(){
   buttonSounds[lastNumberInSequence].play();
 }
 
-function showClickedButton(chosenColourNumber){
-  $(".btn").removeClass("." + buttonColours[chosenColourNumber]);
-  $(".btn").addClass(".pressed");
-
-  setTimeout(function(){
-    $(".btn").removeClass(".pressed");
-  $(".btn").addClass("." + buttonColours[chosenColourNumber])
-  }, 1000);
-};
+function animatePress(chosenColourNumber) {
+  $("#" + buttonColours[chosenColourNumber]).addClass("pressed");
+  setTimeout(function () {
+    $("#" + buttonColours[chosenColourNumber]).removeClass("pressed");
+  }, 100);
+}
