@@ -40,7 +40,7 @@ $(".btn").click(function () {
             gameLevel = 1;
             index = 0;
 
-      } else if (chosenColourNumber === gamePattern[index] && index === gameLevel) {
+      } else if (chosenColourNumber === gamePattern[index] && index === gameLevel - 1) {
             colorNumber = nextSequence();
             gamePattern.push(colorNumber);
             gameLevel++;
