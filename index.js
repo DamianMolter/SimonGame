@@ -13,6 +13,9 @@ $(document).keydown(function (event) {
       }
 })
 
+console.log(gamePattern); //test view
+
+
 $(".btn").click(function () {
       switch (this.id) {
             case "green":
@@ -39,13 +42,14 @@ $(".btn").click(function () {
             gamePattern.push(colorNumber);
             gameLevel = 1;
             index = 0;
-
+            $("#level-title").text("Level " + gameLevel); 
       } else if (chosenColourNumber === gamePattern[index] && index === gameLevel - 1) {
             colorNumber = nextSequence();
             gamePattern.push(colorNumber);
             gameLevel++;
             index = 0;
             $("#level-title").text("Level " + gameLevel);
+            console.log(gamePattern); //test view
       } else if (chosenColourNumber === gamePattern[index] ) {
             index++;
       }
