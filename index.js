@@ -56,10 +56,12 @@ $(".btn").click(function () {
     gameLevel++;
     index = 0;
     $("#level-title").text("Level " + gameLevel);
+      buttonSounds[chosenColourNumber].play();
     console.log(gamePattern); //
 
   } else if (chosenColourNumber === gamePattern[index]) {
     index++;
+    buttonSounds[chosenColourNumber].play();
   }
 });
 
